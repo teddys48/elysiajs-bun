@@ -10,8 +10,8 @@ export const LogMiddleware = () =>
         session_id: generateRandomString(),
       };
     })
-    .onAfterHandle(async ({ set, responseValue, path, store }) => {
-      // console.log(`check user  ${store}`, store);
+    .onAfterHandle(({ set, responseValue, path, store }) => {
+      console.log(`check store  ${store}`, store);
       console.log(
         `[RES] ${path} → status: ${set.status}, response:`,
         JSON.stringify(responseValue)
