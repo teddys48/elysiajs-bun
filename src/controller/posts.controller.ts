@@ -14,9 +14,6 @@ export const postsController = new Elysia().group("/api", (data) =>
       return res;
     },
     {
-      body: t.Object({
-        username: t.String(),
-      }),
       tags: ["Posts"],
     }
   )
