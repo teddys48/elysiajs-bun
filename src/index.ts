@@ -21,6 +21,7 @@ const app = new Elysia()
         },
         logFilePath: "./logs/logs.log",
         ip: true,
+
         customLogFormat:
           "🦊 {now} {level} {duration} {method} {pathname} {status} {message} {ip}",
       },
