@@ -34,6 +34,10 @@ const app = new Elysia()
             name: "Posts",
             description: "list all posts",
           },
+          {
+            name: "Auth",
+            description: "list all authentication",
+          },
         ],
       },
     })

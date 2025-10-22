@@ -5,6 +5,8 @@ import {
   createPostSchema,
   findPostSchema,
   responseAllPosts,
+  responseFindPosts,
+  responsePosts,
 } from "../schema/posts.schema";
 import { LogMiddleware, testMiddleware } from "../middleware/log.middleware";
 
@@ -44,6 +46,7 @@ export const postsController = new Elysia()
         {
           tags: ["Posts"],
           query: findPostSchema,
+          response: responseFindPosts,
         }
       )
       .post(
@@ -61,6 +64,7 @@ export const postsController = new Elysia()
         {
           body: createPostSchema,
           tags: ["Posts"],
+          response: responsePosts,
         }
       )
       .post(
@@ -79,6 +83,7 @@ export const postsController = new Elysia()
           tags: ["Posts"],
           query: findPostSchema,
           body: createPostSchema,
+          response: responsePosts,
         }
       )
       .get(
@@ -96,6 +101,7 @@ export const postsController = new Elysia()
         {
           tags: ["Posts"],
           query: findPostSchema,
+          response: responsePosts,
         }
       )
       .onError(({ code, error, set }) => {
