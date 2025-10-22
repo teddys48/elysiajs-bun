@@ -1,4 +1,8 @@
-export const generateRandomString = () => {};
+import { v7 } from "uuid";
+
+export const generateRandomString = () => {
+  return v7().split("-").join("");
+};
 
 interface BuildResponse {
   code: number;

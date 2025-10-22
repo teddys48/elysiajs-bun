@@ -14,3 +14,22 @@ export const createPostSchema = t.Object({
     error: "content is required",
   }),
 });
+
+export const responseAllPosts = t.Object({
+  code: t.Number({
+    default: 0,
+  }),
+  message: t.String({
+    default: "success",
+  }),
+  data: t.Array(
+    t.Object({
+      id: t.Numeric(),
+      title: t.String(),
+      content: t.String(),
+      created_at: t.Nullable(t.Date()),
+      updated_at: t.Nullable(t.Date()),
+      code: t.Nullable(t.String()),
+    })
+  ),
+});
