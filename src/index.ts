@@ -1,6 +1,13 @@
 import { Elysia } from "elysia";
+import { openapi } from "@elysiajs/openapi";
+import { postsController } from "./controller/posts.controller";
 
-const app = new Elysia().get("/", () => "Hello Elysia").listen(3000);
+const app = new Elysia()
+  .use(openapi())
+  .use(postsController)
+  .get("/", () => "Hello Elysia")
+  .get("*", () => "what are you looking for?!")
+  .listen(3000);
 
 console.log(
   `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
