@@ -39,6 +39,7 @@ const app = new Elysia()
             description: "list all authentication",
           },
         ],
+        // security: [{}],
       },
     })
   )
