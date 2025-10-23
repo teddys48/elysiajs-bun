@@ -9,9 +9,11 @@ import {
   responsePosts,
 } from "../schema/posts.schema";
 import { LogMiddleware, testMiddleware } from "../middleware/log.middleware";
+import { JWTMiddleware } from "../middleware/jwt.middleware";
 
 export const postsController = new Elysia()
   .use(LogMiddleware)
+  .use(JWTMiddleware)
   .group("/api/post", (data) =>
     data
       .get(
@@ -33,7 +35,6 @@ export const postsController = new Elysia()
       .get(
         "/find",
         async ({ set, query }) => {
-          console.log("object", query);
           let { id } = query;
           let res = await service.find(id);
           res.code == 0

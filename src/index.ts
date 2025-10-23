@@ -3,6 +3,8 @@ import { openapi } from "@elysiajs/openapi";
 import { postsController } from "./controller/posts.controller";
 import logixlysia from "logixlysia";
 import cors from "@elysiajs/cors";
+import { generateRandomString } from "./helper/helper";
+import { authController } from "./controller/auth.controller";
 // import { LogMiddleware } from "./middleware/log.middleware";
 
 const app = new Elysia()
@@ -32,19 +34,29 @@ const app = new Elysia()
       documentation: {
         tags: [
           {
-            name: "Posts",
-            description: "list all posts",
-          },
-          {
             name: "Auth",
             description: "list all authentication",
           },
+          {
+            name: "Posts",
+            description: "list all posts",
+          },
         ],
+        components: {
+          securitySchemes: {
+            bearerAuth: {
+              type: "http",
+              scheme: "bearer",
+              bearerFormat: "JWT",
+            },
+          },
+        },
         // security: [{}],
       },
     })
   )
   .use(postsController)
+  .use(authController)
   .get("/", () => "Hello Elysia")
   .get("*", () => "what are you looking for?!")
   .listen(3000);

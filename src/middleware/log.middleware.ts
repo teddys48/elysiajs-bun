@@ -3,7 +3,12 @@ import { generateRandomString } from "../helper/helper";
 
 export const LogMiddleware = () =>
   new Elysia()
-    .derive(async ({ request, path, store }) => {
+    .onTransform(({ store }) => {
+      store = {
+        asasa: "qwqwqw",
+      };
+    })
+    .derive(async ({ request, path }) => {
       const body = await request.json().catch(() => null);
       console.log(`[REQ] ${path} → body:`, body);
       return {
@@ -11,7 +16,6 @@ export const LogMiddleware = () =>
       };
     })
     .onAfterHandle(({ set, responseValue, path, store }) => {
-      console.log(`check store  ${store}`, store);
       console.log(
         `[RES] ${path} → status: ${set.status}, response:`,
         JSON.stringify(responseValue)
@@ -21,8 +25,3 @@ export const LogMiddleware = () =>
 export const testMiddleware = () => {
   console.log("object");
 };
-
-export const JWTMiddleware = () =>
-  new Elysia().onBeforeHandle(({ headers }) => {
-    console.log("lewat", headers);
-  });
