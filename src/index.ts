@@ -6,14 +6,14 @@ import cors from "@elysiajs/cors";
 import { generateRandomString } from "./helper/helper";
 import { authController } from "./controller/auth.controller";
 import { configDotenv } from "dotenv";
-// import { LogMiddleware } from "./middleware/log.middleware";
+import { LogMiddleware } from "./middleware/log.middleware";
 
 configDotenv();
 
 const { port } = process.env;
 
 const app = new Elysia()
-  // .use(LogMiddleware())
+  .use(LogMiddleware)
   .use(cors())
   .use(
     logixlysia({

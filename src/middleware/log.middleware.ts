@@ -3,17 +3,9 @@ import { generateRandomString } from "../helper/helper";
 
 export const LogMiddleware = () =>
   new Elysia()
-    .onTransform(({ store }) => {
-      store = {
-        asasa: "qwqwqw",
-      };
-    })
-    .derive(async ({ request, path }) => {
+    .onBeforeHandle(async ({ request, path }) => {
       const body = await request.json().catch(() => null);
       console.log(`[REQ] ${path} → body:`, body);
-      return {
-        session_id: generateRandomString(),
-      };
     })
     .onAfterHandle(({ set, responseValue, path, store }) => {
       console.log(
