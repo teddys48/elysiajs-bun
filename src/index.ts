@@ -5,7 +5,12 @@ import logixlysia from "logixlysia";
 import cors from "@elysiajs/cors";
 import { generateRandomString } from "./helper/helper";
 import { authController } from "./controller/auth.controller";
+import { configDotenv } from "dotenv";
 // import { LogMiddleware } from "./middleware/log.middleware";
+
+configDotenv();
+
+const { port } = process.env;
 
 const app = new Elysia()
   // .use(LogMiddleware())
@@ -59,7 +64,7 @@ const app = new Elysia()
   .use(authController)
   .get("/", () => "Hello Elysia")
   .get("*", () => "what are you looking for?!")
-  .listen(3000);
+  .listen(port);
 
 console.log(
   `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
